@@ -1,0 +1,11 @@
+{
+  "name": "secret-actions",
+  "version": "1.0.0",
+  "main": "",
+  "license": "MIT",
+  "dependencies": {
+    "@actions/core": "^1.8.2",
+    "@actions/github": "^5.0.3"
+  },
+  "packageManager": "yarn@3.2.1"
+}
