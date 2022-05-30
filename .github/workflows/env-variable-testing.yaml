@@ -1,0 +1,14 @@
+on: [ push , workflow_dispatch]
+
+jobs:
+  env_variable_testing:
+    runs-on: ubuntu-latest
+    name: Env Variable Test
+    steps:
+      - name: View Env
+        run: |
+          env
+
+      - name: Concatenate
+        run: |
+          echo "$GITHUB_REF-concat"
