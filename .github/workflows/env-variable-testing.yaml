@@ -12,3 +12,4 @@ jobs:
       - name: Concatenate
         run: |
           echo "$GITHUB_REF-concat"
+          echo ${GITHUB_REF//\//_}-plan.tfplan
