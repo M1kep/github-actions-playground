@@ -1,0 +1,21 @@
+name: Auto Deploy Trigger Testing
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+jobs:
+  deploy:
+    name: Triggers Target
+    if: ${{ !github.event.pull_request }}
+    runs-on: ubuntu-latest
+    steps:
+      - run: gh workflow run AutoDeployTarget -f version=$IMAGE_SEMVER --repo $OWNER/$REPO
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          IMAGE_SEMVER: "random_value"
+          OWNER: ${{ github.repository_owner }}
+          REPO: ${{ github.event.repository.name }}

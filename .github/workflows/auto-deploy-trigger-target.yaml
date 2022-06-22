@@ -1,0 +1,22 @@
+name: AutoDeployTarget
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version tag'
+        required: true
+        type: string
+
+jobs:
+  dispatch:
+    name: Send repository dispatch event to platform-infra
+    runs-on: ubuntu-latest
+    steps:
+      - name: Extract branch name
+        shell: bash
+        run: echo "::set-output name=branch::$(echo ${GITHUB_REF#refs/heads/})"
+        id: extract_branch
+      - name: Run Some Stuff
+        run: |
+          echo '{"image": "${{ github.event.repository.name }}", "tag": "${{ github.event.inputs.version }}", "branch": "${{ steps.extract_branch.outputs.branch }}"}'
