@@ -1,0 +1,27 @@
+
+
+name: Test Artifacts
+
+on:
+  workflow_dispatch:
+  
+jobs:
+  matrix-artifact:
+    strategy:
+      matrix:
+        keys: [one, two]
+    name: Send repository dispatch event to platform-infra
+    runs-on: ubuntu-latest
+    steps:
+      - name: Make Dir
+        run: mkdir dist
+        
+      - name: Write File
+        run: echo "${{ matrix.keys }}" > ./dist/${{ matrix.keys }}.txt
+        
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: build-artifacts
+          path: |
+            dist/*.txt
